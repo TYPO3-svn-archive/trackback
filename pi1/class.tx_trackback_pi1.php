@@ -77,7 +77,7 @@ class tx_trackback_pi1 extends tslib_pibase {
 			$timestring1 = $this->timestring($t["crdate"]);
 			$timestring2 = $this->timestring($t["last_visit"]);
 			if($t['visits']>1){
-			    $times = $this->pi_getLL('tb_item_time1').' <span class="timestring">'.$timestring1.'</span> '.$this->pi_getLL('tb_item_time2').' <span class="timestring">'.$timestring2.'</span> '.$this->pi_getLL('tb_item_time3');
+			    $times = 'Von <span class="timestring">'.$timestring1.'</span> bis <span class="timestring">'.$timestring2.'</span>';
 			}else{
 			    $times = '<span class="timestring">'.$timestring1.'</span>';
 			}
