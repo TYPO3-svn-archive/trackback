@@ -6,11 +6,32 @@
 	</meta>
 	<data type="array">
 		<languageKey index="default" type="array">
-			<label index="list_mode_1">Mode 1</label>
-			<label index="list_mode_2">Mode 2</label>
-			<label index="list_mode_3">Mode 3</label>
-			<label index="back">Back</label>
-			<label index="submit_button_label">Click here to submit value</label>
+			<label index="tb_item_time1">From</label>
+			<label index="tb_item_time2">to</label>
+			<label index="tb_item_time3"></label>
+			<label index="monday">Monday</label>
+			<label index="tuesday">Tuesday</label>
+			<label index="wednesday">Wednesday</label>
+			<label index="thursday">Thursday</label>
+			<label index="friday">Friday</label>
+			<label index="saturday">Saturday</label>
+			<label index="sunday">Sunday</label>
+			<label index="today">Today</label>
+			<label index="yesterday">Yesterday</label>
+		</languageKey>
+		<languageKey index="de" type="array">
+			<label index="tb_item_time1">Von</label>
+			<label index="tb_item_time2">bis</label>
+			<label index="tb_item_time3"></label>
+			<label index="monday">Montag</label>
+			<label index="tuesday">Dienstag</label>
+			<label index="wednesday">Mittwoch</label>
+			<label index="thursday">Donnerstag</label>
+			<label index="friday">Freitag</label>
+			<label index="saturday">Samstag</label>
+			<label index="sunday">Sonntag</label>
+			<label index="today">Heute</label>
+			<label index="yesterday">Gestern</label>
 		</languageKey>
 	</data>
 </T3locallang>
