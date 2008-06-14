@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>database</type>
+		<description>Language labels for database tables/fields belonging to extension 'trackback'</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="tx_trackback_tb">Trackbacks</label>
+			<label index="tx_trackback_tb.tpage">Target PageId</label>
+			<label index="tx_trackback_tb.url">Trackback URL</label>
+			<label index="tx_trackback_tb.sref">Shorthand Referer</label>
+			<label index="tx_trackback_tb.visits">Number of Incoming IPs</label>
+			<label index="tx_trackback_tb.title">Title</label>
+			<label index="tx_trackback_tb.last_visit">Timestamp of last trackback</label>
+			<label index="tx_trackback_ips">IPs</label>
+			<label index="tx_trackback_ips.tpage">Trackback</label>
+			<label index="tx_trackback_ips.sref">Shorthand Referer</label>
+			<label index="tx_trackback_ips.ip">IP</label>
+			<label index="tx_trackback_ips.time">timestamp of visit</label>
+			<label index="tt_content.list_type_pi1">Trackback</label>
+		</languageKey>
+		<languageKey index="de" type="array">
+			<label index="tx_trackback_tb">Trackbacks</label>
+			<label index="tx_trackback_tb.tpage">Verlinkte PageId</label>
+			<label index="tx_trackback_tb.url">Trackback-URL</label>
+			<label index="tx_trackback_tb.sref">Kurzname Referer</label>
+			<label index="tx_trackback_tb.visits">Zahl der eingehenden Unique Besucher</label>
+			<label index="tx_trackback_tb.title">Titel</label>
+			<label index="tx_trackback_tb.last_visit">Zeitpunkt des letzten Trackbacks</label>
+			<label index="tx_trackback_ips">IPs</label>
+			<label index="tx_trackback_ips.tpage">Trackback</label>
+			<label index="tx_trackback_ips.sref">Kurzname Referer</label>
+			<label index="tx_trackback_ips.ip">IP</label>
+			<label index="tx_trackback_ips.time">Zeitpunkt des Besuches</label>
+			<label index="tt_content.list_type_pi1">Trackback</label>
+		</languageKey>
+	</data>
+</T3locallang>

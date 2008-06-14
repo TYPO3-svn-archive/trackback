@@ -1,0 +1,6 @@
+plugin.tx_trackback_pi1 {
+    minvisits      = {$plugin.tx_trackback_pi1.minvisits}
+    excludese      = {$plugin.tx_trackback_pi1.excludese}
+    limit      = {$plugin.tx_trackback_pi1.limit}
+    storagepid	= {$plugin.tx_trackback_pi1.storagepid}
+}

@@ -1,0 +1,10 @@
+plugin.tx_trackback_pi1 {
+    # cat= trackback/config/0; type=int+; label=Min Visits for Display: How many unique Visitors have to come over a trackback before it's displayed?
+    minvisits = 3
+    # cat= trackback/config/1; type=int+; label=Max displayed trackbacks: How many trackbacks will be listed if theres a big number of urls?
+    limit = 10
+    # cat= trackback/config/2; type=boolean; label=Exclude Search Engines:Do not count links from search results as trackbacks
+    excludese = 1
+    # cat= trackback/config/3; type=int+; label=Storage pid:Where should the database entries be stored?
+    storagepid = 1
+}
