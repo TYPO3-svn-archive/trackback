@@ -32,7 +32,7 @@
 			<label index="tx_trackback_ips.tpage">Trackback</label>
 			<label index="tx_trackback_ips.sref">Kurzname Referer</label>
 			<label index="tx_trackback_ips.ip">IP</label>
-			<label index="tx_trackback_ips.time">Zeitpunkt des Besuches</label>
+			<label index="tx_trackback_ips.time">Zeitpunkt des Besuchs</label>
 			<label index="tt_content.list_type_pi1">Trackback</label>
 		</languageKey>
 	</data>
