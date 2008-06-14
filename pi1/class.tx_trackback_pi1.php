@@ -70,7 +70,7 @@ class tx_trackback_pi1 extends tslib_pibase {
 		foreach($tb as $t){
 			if($eo=='odd'){$eo='even';}
 			else{$eo='odd';}
-			$t['url'] = htmlentities($t['url']);
+			$t['url']=htmlentities($t['url']);
 			if($t['title']){$title=$t['title'];}
 			else{$title=$t['url'];}
 			$timestring1 = $this->timestring($t["crdate"]);
