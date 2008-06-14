@@ -38,7 +38,7 @@ class tx_trackback_pi1 extends tslib_pibase {
 	var $extKey        = 'trackback';	// The extension key.
 	var $pi_checkCHash = true;
 	var $excludevars;
-	
+
 	/**
 	 * The main method of the PlugIn
 	 *
@@ -51,7 +51,6 @@ class tx_trackback_pi1 extends tslib_pibase {
 		$this->pi_setPiVarDefaults();
 		$this->pi_loadLL();
 		$this->fix_storage();
-		
         $GLOBALS['TSFE']->additionalHeaderData[$this->prefixId] .=
 			'<link href="typo3conf/ext/trackback/pi1/style.css" type="text/css" rel="stylesheet" />';
 		// Referer
@@ -77,7 +76,7 @@ class tx_trackback_pi1 extends tslib_pibase {
 			$timestring1 = $this->timestring($t["crdate"]);
 			$timestring2 = $this->timestring($t["last_visit"]);
 			if($t['visits']>1){
-			    $times = 'Von <span class="timestring">'.$timestring1.'</span> bis <span class="timestring">'.$timestring2.'</span>';
+			    $times = $this->pi_getLL('tb_item_time1').' <span class="timestring">'.$timestring1.'</span> '.$this->pi_getLL('tb_item_time2').' <span class="timestring">'.$timestring2.'</span> '.$this->pi_getLL('tb_item_time3');
 			}else{
 			    $times = '<span class="timestring">'.$timestring1.'</span>';
 			}
@@ -96,10 +95,10 @@ class tx_trackback_pi1 extends tslib_pibase {
         height: '.((count($tb))*15).'px;
 	}
 </style>';
-		
+
 		return $this->pi_wrapInBaseClass($content);
 	}
-	
+
 	function fix_storage(){
 	    $update = array('pid' => $this->conf['storagepid']);
 		$GLOBALS['TYPO3_DB']->exec_UPDATEquery('tx_trackback_tb', '', $update);
@@ -108,13 +107,16 @@ class tx_trackback_pi1 extends tslib_pibase {
 
 	function get_tb($ad){
 		$array = array();
+		$this->conf['minvisits'] = (int) $this->conf['minvisits'];
+		if(!$this->conf['limit']){$this->conf['limit'] = 4;}
 		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', 'tx_trackback_tb', 'tpage = \''.$ad.'\' AND hidden = 0 AND deleted = 0 AND visits >= '.$this->conf['minvisits'], '', 'visits DESC, last_visit DESC', $this->conf['limit']);
 		while($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)){
 			$array[] = $row;
 		}
+		//echo mysql_error();
 		return $array;
 	}
-	
+
 	function handle_ref($ad, $ref, $ip){
 		$sref = $this->simplify($ref);
 		$sql = 'SELECT uid FROM tx_trackback_ips WHERE
@@ -128,11 +130,11 @@ class tx_trackback_pi1 extends tslib_pibase {
 		$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
 		if(!$row['uid']){
 			// IP was not counted yet.. so let's go!
-			
+
 			// Insert  IP
 			$insert = array('tpage' => $ad, 'ip' => $ip, 'time' => time(), 'sref' => $sref);
 			$GLOBALS['TYPO3_DB']->exec_INSERTquery('tx_trackback_ips', $insert);
-			
+
 			// Check if tpage<->url is already exists
 			$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('uid, visits', 'tx_trackback_tb','tpage = \''.$ad.'\' AND sref = \''.$sref.'\' AND deleted = 0 AND hidden = 0');
 			$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
@@ -154,7 +156,7 @@ class tx_trackback_pi1 extends tslib_pibase {
 			}
 		}
 	}
-	
+
 	function make_ad(){
 	    $g = $_GET;
 	    $params = array();
@@ -170,7 +172,7 @@ class tx_trackback_pi1 extends tslib_pibase {
 		$params = join('&',$params);
 		return 'index.php?id='.$GLOBALS['TSFE']->id.'&'.$params;
 	}
-	
+
 	function is_ref($ref){
 		if(!trim($ref)){return false;}
 		if($this->conf['excludese']){
@@ -188,7 +190,7 @@ class tx_trackback_pi1 extends tslib_pibase {
 		}
 		return true;
 	}
-	
+
 	function shorten($string, $max_lenght, $end){
 		$string = trim($string);
 		if(strlen($string)>$max_lenght){
@@ -198,7 +200,7 @@ class tx_trackback_pi1 extends tslib_pibase {
 		}
 		return $string;
 	}
-	
+
 	function simplify($url){
 		$expr = array('http://', 'https://', 'www.');
 		foreach($expr as $e){
@@ -207,24 +209,24 @@ class tx_trackback_pi1 extends tslib_pibase {
 		$url = explode('?', $url);
 		return $url[0];
 	}
-	
+
 	function timestring($stamp){
 	    $time = date("H:i:s",$stamp);
 		switch(date('D', $stamp)){
-		    case 'Mon': $day = 'Montag';break;
-			case 'Tue': $day = 'Dienstag';break;
-			case 'Wed': $day = 'Mittwoch';break;
-			case 'Thu': $day = 'Donnerstag';break;
-			case 'Fri': $day = 'Freitag';break;
-			case 'Sat': $day = 'Samstag';break;
-			case 'Sun': $day = 'Sonntag';break;
+		    case 'Mon': $day = $this->pi_getLL('monday');break;
+			case 'Tue': $day = $this->pi_getLL('tuesday');;break;
+			case 'Wed': $day = $this->pi_getLL('wednesday');;break;
+			case 'Thu': $day = $this->pi_getLL('thursday');;break;
+			case 'Fri': $day = $this->pi_getLL('friday');;break;
+			case 'Sat': $day = $this->pi_getLL('saturday');;break;
+			case 'Sun': $day = $this->pi_getLL('sunday');;break;
 		}
 		// Mitternacht
 		$m1 = gmmktime(0,0, 0, date('n'), date('d'), date('Y'));
 		$m2 = $m1 - 60*60*24;
 		$m3 = $m1 - 60*60*24*7;
-		if($stamp>$m2){$day = 'Gestern';}
-		if($stamp>$m1){$day = 'Heute';}
+		if($stamp>$m2){$day = $this->pi_getLL('yesterday');;}
+		if($stamp>$m1){$day = $this->pi_getLL('today');;}
 		if($stamp<$m3){$day = date('j.n.y', $stamp);}
 		return "$day, $time";
 	}
